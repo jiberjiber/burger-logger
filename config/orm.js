@@ -28,9 +28,9 @@ const orm = {
     update: function(table, objColVals, condition, cb){
         console.log(`Update called!`);
     },
-    delete: function(table, condition, cb){
+    delete: function(table, target, cb){
         var queryString = `DELETE FROM ${table}`;
-        queryString += ` WHERE burgers = ${condition}`;
+        queryString += ` WHERE burgers = ${target}`;
 
         connection.query(queryString, function(err, result){
             if(err) throw err;
