@@ -18,11 +18,25 @@ router.get('/', (req, res) => {
 router.post('/api/burgers', (req, res) => {
     burger.create(req.body, result => {
         console.log(result);
+        if(result.affectedRows == 1){
+            return res.status(200).end();
+        } else {
+            res.status(404).end();
+        }
     });
 });
 
 router.put('/api/burgers/:id', (req, res) => {
-    console.log(`Put received, update should be called here.`);
+    var target = req.params.id;
+
+    burger.update('devoured', target, result => {
+        console.log(result);
+        if(result.affectedRows == 1){
+            return res.status(200).end();
+        } else {
+            res.status(404).end();
+        }
+    });
 });
 
 router.delete('/api/burgers/:id', (req, res) => {
