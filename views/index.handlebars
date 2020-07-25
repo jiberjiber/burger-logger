@@ -1,0 +1,24 @@
+<h1>Available burgers</h1>
+<ul>
+    {{#each burgers}}
+        {{#unless devoured}}
+            {{> burgers/burger-block}}
+        {{/unless}}
+    {{/each}}
+</ul>
+
+<hr>
+<h1>Burgers I have eaten</h1>
+<ul>
+    {{#each burgers}}
+        {{#if devoured}}
+            {{> burgers/burger-block}}
+        {{/if}}
+    {{/each}}
+</ul>
+
+<form class="addForm">
+    <label for="burger">Burger:</label>
+    <input type="text" id="burger" name="name">
+    <button type="submit">Add Burger</button>
+</form>
