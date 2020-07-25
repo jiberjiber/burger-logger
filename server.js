@@ -7,10 +7,13 @@ const mysql = require('mysql');
 // Express setup
 const app = express();
 const PORT = process.env.PORT || 8080;
+app.use(express.static("public"));
 
-// JSON Parsing
+// JSON parsing
 app.use(express.urlencoded({ extended:true }));
 app.use(express.json());
+
+// Handlebars setup
 app.engine("handlebars", handlebars({ defaultLayout:"main" }));
 app.set("view engine", "handlebars");
 
