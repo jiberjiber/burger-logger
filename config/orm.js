@@ -1,41 +1,49 @@
 // Add Dependencies
 const connection = require('../config/connection.js');
-const { query } = require('express');
 
 
 // ORM Object
 const orm = {
     all: function(table, cb){
         var queryString = `SELECT * FROM ${table};`;
-        connection.query(queryString, function(err, res){
+        connection.query(queryString, function(err, result){
             if(err) throw err;
 
-            cb(res);
+            console.log(result);
+
+            cb(result);
         });
     },
     create: function(table, val, cb){
-        var queryString = `INSERT INTO ${table}(burger)`;
-        queryString += ` VALUES (${val});`;
+        console.log(val);
+        var queryString = `INSERT INTO ${table} (burger_name, devoured)`;
+        queryString += ` VALUES ('${val.name}', false);`;
 
         console.log(`Query: ${queryString}`);
 
         connection.query(queryString, function(err, result){
             if(err) throw err;
 
-            cb(res);
+            cb(result);
         });
     },
-    update: function(table, objColVals, condition, cb){
-        console.log(`Update called!`);
-    },
-    delete: function(table, target, cb){
-        var queryString = `DELETE FROM ${table}`;
-        queryString += ` WHERE burgers = ${target}`;
+    update: function(table, col, target, cb){
+        var queryString = `UPDATE ${table} SET ${col} = true WHERE id = ${target};`
 
         connection.query(queryString, function(err, result){
             if(err) throw err;
 
-            cb(res);
+            cb(result);
+        });
+    },
+    delete: function(table, target, cb){
+        var queryString = `DELETE FROM ${table}`;
+        queryString += ` WHERE id = ${target}`;
+
+        connection.query(queryString, function(err, result){
+            if(err) throw err;
+
+            cb(result);
         });
     }
 };
