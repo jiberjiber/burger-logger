@@ -8,12 +8,12 @@ const burger = {
         });
     },
     create: function(val, cb){
-        orm.insert('burgers', val, res => {
+        orm.create('burgers', val, res => {
             cb(res);
         });
     },
-    update: function(objColVals, condition, cb){
-        orm.update('burgers', objColVals, condition, res => {
+    update: function(col, condition, cb){
+        orm.update('burgers', col, condition, res => {
             cb(res);
         })
     },
